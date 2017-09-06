@@ -3,6 +3,12 @@ import Masonry from 'react-masonry-infinite';
 import shortid from 'shortid';
 import '../App.css';
 import Header from '../slices/Header';
+import Projects from './Projects';
+import {
+  BrowserRouter,
+  Route,
+  Link
+} from 'react-router-dom'
 
 
 class CategoryComponent extends Component {
@@ -13,6 +19,7 @@ class CategoryComponent extends Component {
       elements: [
         {title:"Hotels", background:"url(images/proj1.jpg)"},
       ],
+      project:{},
       // animate: new Animated.Value(0),
     };
   }
@@ -31,24 +38,50 @@ class CategoryComponent extends Component {
             <div className="App transition-item">
                  <Header />
                 <div className="container">
-                <Masonry
-                    className="masonry"
-                    hasMore={this.state.hasMore}
-                    loadMore={this.loadMore}
-                >
-                    {
-                    this.state.elements.map(({ title, background }, i) => (
-                        <div key={i} className="card" style={{ height: 300, ["backgroundImage"]: background }}>
-                        <a href="#" className="nav-wrapper">
-                            <h3 className="title">{title}</h3>
-                        </a>
-                        </div>
-                    ))
-                    }
-                </Masonry>
+                  {
+                    this._renderYearGroup()
+                  }
                 </div>
             </div>
     );
+  }
+  componentWillMount(){
+    this.setState({projects:Projects});
+  }
+  _renderYearGroup(){
+    return this.state.projects.map((project)=>{
+      return this._renderProjectsYear(project)
+    });
+  }
+  _renderProjectsYear({year,projects}){
+    return (
+      <Masonry
+      className="masonry"
+      hasMore={this.state.hasMore}
+      loader={
+        <div className="sk-folding-cube">
+          <div className="sk-cube1 sk-cube" />
+          <div className="sk-cube2 sk-cube" />
+          <div className="sk-cube4 sk-cube" />
+          <div className="sk-cube3 sk-cube" />
+        </div>
+      }
+      loadMore={this.loadMore}
+    > 
+    <h2>{year}</h2>
+    {
+      projects.map(({slug, name},i)=>{
+        return (
+          <div key={i} className="card" style={{ height: 300, ["backgroundImage"]: slug }}>
+                <Link to={slug} className="nav-wrapper">
+                  <h3 className="title">{name}</h3>
+                </Link>
+          </div>
+        )
+      })
+      }
+    </Masonry>
+    )
   }
 }
 
