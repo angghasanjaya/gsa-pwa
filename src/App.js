@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import { Home, Category } from './pages';
+import { Home, Category, Project } from './pages';
 import Transition from './TransitionWrapper'
 
 const App = () => {
@@ -12,6 +12,9 @@ const App = () => {
         </Route>
         <Route path="/category">
           <Category/>
+        </Route>
+        <Route path="/project">
+          <Project/>
         </Route>
       </Switch>
       

@@ -62,7 +62,7 @@ class Home extends Component {
           >
             {
               this.state.elements.map(({ title, background, link }, i) => (
-                <div key={i} className="card" style={{ height: 300, ["backgroundImage"]: background }}>
+                <div key={i} className="card" style={{ height: 300, backgroundImage: background }}>
                   <Link to={link} className="nav-wrapper">
                     <h3 className="title">{title}</h3>
                   </Link>

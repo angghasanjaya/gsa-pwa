@@ -8,12 +8,18 @@ import {
 const Header =()=>{
     return(
         <Route>
-        <div className="header">
+        <div className="header" style={{marginTop:"40px"}}>
             <img src="/images/logo.png" width="64"/>
-            <Link to="/"><h3>GAGAS SEMESTA ALAM</h3></Link>
+            <Link to="/" style={{textDecoration:"none", color:"#AE7548"}}><h3 style={title}>GAGAS SEMESTA ALAM</h3></Link>
         </div>
         </Route>
     );
+}
+
+const title={
+    fontFamily: "'Alegreya', serif",
+    
+    fontWeight: 'Bold',
 }
 
 export default Header;

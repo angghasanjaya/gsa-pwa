@@ -54,33 +54,37 @@ class CategoryComponent extends Component {
     });
   }
   _renderProjectsYear({year,projects}){
+    
     return (
-      <Masonry
-      className="masonry"
-      hasMore={this.state.hasMore}
-      loader={
-        <div className="sk-folding-cube">
-          <div className="sk-cube1 sk-cube" />
-          <div className="sk-cube2 sk-cube" />
-          <div className="sk-cube4 sk-cube" />
-          <div className="sk-cube3 sk-cube" />
-        </div>
-      }
-      loadMore={this.loadMore}
-    > 
-    <h2>{year}</h2>
-    {
-      projects.map(({slug, name},i)=>{
-        return (
-          <div key={i} className="card" style={{ height: 300, ["backgroundImage"]: slug }}>
-                <Link to={slug} className="nav-wrapper">
-                  <h3 className="title">{name}</h3>
-                </Link>
-          </div>
-        )
-      })
-      }
-    </Masonry>
+      <div style={{marginBottom:"80px"}}>
+        <h2 style={{color:"#fff", marginLeft:"62px", marginRight:"62px"}}>{year}</h2>
+        <Masonry
+          className="masonry"
+          hasMore={this.state.hasMore}
+          loader={
+            <div className="sk-folding-cube">
+              <div className="sk-cube1 sk-cube" />
+              <div className="sk-cube2 sk-cube" />
+              <div className="sk-cube4 sk-cube" />
+              <div className="sk-cube3 sk-cube" />
+            </div>
+          }
+          loadMore={this.loadMore}
+        > 
+          {
+            projects.map(({slug, name},i)=>{
+              let background="url(/images/"+slug+".jpg)";
+              return (
+                <div key={i} className="card" style={{ height: 300, backgroundImage: background, backgroundPosition:"center"}}>
+                      <Link to={"/project/"+slug} className="nav-wrapper">
+                        <h3 className="title">{name}</h3>
+                      </Link>
+                </div>
+              )
+            })
+            }
+        </Masonry>
+      </div>
     )
   }
 }
